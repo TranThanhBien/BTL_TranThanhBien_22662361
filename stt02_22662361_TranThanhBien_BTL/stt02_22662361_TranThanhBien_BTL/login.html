@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/variables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <img src="./images/logo-nt-png.png" alt="Logo NT" class="logo" />
+    <div class="center">
+        <a style="color: black;" href="./index.html">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute;
+    top: 8.5%;
+    margin-left: 25px; cursor:pointer;">
+                <path
+                    d="M11.9481 14.8285L10.5339 16.2427L6.29122 12L10.5339 7.7574L11.9481 9.17161L10.1196 11H17.6568V13H10.1196L11.9481 14.8285Z"
+                    fill="currentColor" />
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M4.22183 19.7782C-0.0739419 15.4824 -0.0739419 8.51759 4.22183 4.22183C8.51759 -0.0739419 15.4824 -0.0739419 19.7782 4.22183C24.0739 8.51759 24.0739 15.4824 19.7782 19.7782C15.4824 24.0739 8.51759 24.0739 4.22183 19.7782ZM5.63604 18.364C2.12132 14.8492 2.12132 9.15076 5.63604 5.63604C9.15076 2.12132 14.8492 2.12132 18.364 5.63604C21.8787 9.15076 21.8787 14.8492 18.364 18.364C14.8492 21.8787 9.15076 21.8787 5.63604 18.364Z"
+                    fill="currentColor" />
+            </svg>
+        </a>
+        <h1>ĐĂNG NHẬP</h1>
+
+        <form action="#" method="post">
+            <div class="txt_field">
+                <input type="text" id="account" required>
+                <label><i class="fas fa-user"></i> Tài khoản</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" id="pass" required>
+                <label><i class="fas fa-lock"></i> Mật khẩu</label>
+            </div>
+            <input type="submit" value="Đăng nhập">
+            <div class="signup_link">
+                Nếu không có tài khoản, hãy đăng ký! <a href="./signup.html"> Đăng ký</a>
+            </div>
+        </form>
+    </div>
+    <img class="background" src="./images/background-login.png" alt="">
+    <script>
+        document.querySelector("form").onsubmit = function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get input values
+            const account = document.getElementById("account").value;
+            const password = document.getElementById("pass").value;
+
+            // Retrieve stored account information from localStorage
+            const storedAccount = localStorage.getItem("account");
+            const storedPassword = localStorage.getItem("password");
+            const fullname = localStorage.getItem("fullname");
+
+            // Check if credentials match
+            if (account === storedAccount && password === storedPassword) {
+                alert("Đăng nhập thành công!");
+
+                // Save the user's login status and name to localStorage
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("loggedInUser", fullname);
+
+                // Redirect to index.html
+                window.location.href = "./index.html";
+            } else {
+                alert("Tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại.");
+            }
+        };
+    </script>
+
+
+</body>
+
+</html>

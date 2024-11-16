@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>GIỎ HÀNG</title>
+    <link rel="stylesheet" href="./css/cart.css" media="screen">
+    <link id="u-theme-google-font" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+
+</head>
+
+<body>
+    <section class="u-clearfix u-container-align-center u-section-1" id="carousel_5826">
+        <h1 style="text-align: center;">GIỎ HÀNG ĐÃ THÊM</h1>
+
+        <table id="customers">
+            <tr>
+                <th>Hình Ảnh</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá Sản Phẩm</th>
+                <th>Thao Tác</th>
+            </tr>
+        </table>
+        <button class="back-btn" onclick="window.location.href='./congrat.html'">ĐẶT HÀNG</button>
+    </section>
+
+
+
+
+    <footer>
+        <div class="row">
+            <div class="col">
+                <a href="./index.html"><img class="img" src="./images/logo-nt-png.png" alt=""></a>
+                <p>Cửa hàng Nam Tiến - sự lựa chọn uy tín nhất cho những người yêu thích xe từ các
+                    loại xe mới nhất trong cửa hàng. Cửa
+                    hàng
+                    mở bán ở nhiều chi nhánh khác nhau và bán
+                    trong các ngày trong tuần từ 8h00 - 21h00. Hãy đến với cửa hàng Nam Tiến và là các khách hàng
+                    yêu thích những
+                    siêu xe và lựa chọn một loại xe để sử dụng chúng.</p>
+            </div>
+            <div class="col">
+                <h3>Thông Tin</h3>
+                <p><i class="gg-bookmark"></i> Số 7E, Cư Xá Khu Công Nghiệp, Khu Phố 10, Phường An Bình, Thành phố Biên
+                    Hoà, Tỉnh Đồng Nai, Việt Nam.</p>
+                <p><i class="gg-phone"></i> 19002145</p>
+                <p class="email-id"><i class="gg-mail"></i>xemaynamtien123@gmail.com</p>
+            </div>
+            <div class="col">
+                <h3>Liên Hệ</h3>
+                <div class="social-icons">
+                    <i class="gg-facebook"></i>
+                    <i class="gg-instagram"></i>
+                    <i class="gg-youtube"></i>
+                    <i class="gg-twitter"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to load and display cart items
+        function loadCartItems() {
+            const cartTable = document.querySelector('#customers');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Clear table except for the header row
+            cartTable.innerHTML = `
+            <tr>
+                <th>Hình Ảnh</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá Sản Phẩm</th>
+                <th>Thao Tác</th>
+            </tr>
+        `;
+
+            // Check if the cart is empty
+            if (cart.length === 0) {
+                const emptyRow = document.createElement('tr');
+                emptyRow.innerHTML = `<td colspan="4" style="text-align: center;">Giỏ hàng trống</td>`;
+                cartTable.appendChild(emptyRow);
+                return;
+            }
+
+            // Loop through cart items and display each as a table row
+            cart.forEach((product, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td><img style="width: 50%; height: 200px;" src="./images/${product.image}" alt="${product.name}"></td>
+                <td>${product.name}</td>
+                <td>${product.price.toLocaleString()} đ</td>
+                <td><button onclick="removeFromCart(${index})">Xóa</button></td>
+            `;
+                cartTable.appendChild(row);
+            });
+        }
+
+        // Function to remove an item from the cart
+        function removeFromCart(index) {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+            cart.splice(index, 1); // Remove item at specified index
+            localStorage.setItem('cart', JSON.stringify(cart)); // Update cart in localStorage
+            loadCartItems(); // Reload the cart table
+        }
+
+        // Load cart items on page load
+        document.addEventListener('DOMContentLoaded', loadCartItems);
+    </script>
+</body>
+
+</html>
